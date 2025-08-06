@@ -1,0 +1,18 @@
+name: Deployment
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      deploy_to_staging:
+        type: boolean
+        description: Deploy to staging
+        default: true
+
+jobs:
+  Deploy:
+    name: Deploy
+    uses: ZaiusInc/odpint-shared-workflows/.github/workflows/deployment-workflow.yml@v5
+    secrets: inherit
+    with:
+      deploy_to_staging: ${{inputs.deploy_to_staging || false}}
+      node_version: 22.x

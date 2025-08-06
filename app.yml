@@ -1,0 +1,16 @@
+meta:
+  app_id: template_app
+  display_name: template_app
+  version: 0.0.1-dev
+  vendor: optimizely
+  summary: app summary
+  support_url: https://support.optimizely.com
+  contact_email: support@optimizely.com
+  categories:
+    - Marketing
+  availability:
+    - us
+    - eu
+    - au
+
+runtime: node22
