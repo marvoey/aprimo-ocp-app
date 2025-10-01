@@ -2263,10 +2263,10 @@
   dependencies:
     ajv "^8.17.1"
 
-"@zaiusinc/app-sdk@2.2.0":
-  version "2.2.0"
-  resolved "https://npm.pkg.github.com/download/@zaiusinc/app-sdk/2.2.0/5528647108dbc323f0b34fdd384d1c7e414439a8#5528647108dbc323f0b34fdd384d1c7e414439a8"
-  integrity sha512-ylp9H3E943TRsD+9e2wA1T2aFD6hH0r1MSq/MPGpvtDHxFi+oaEXL9QxB8LexSYEgsvKUikmdvPRpW/CGdEF6Q==
+"@zaiusinc/app-sdk@^2.2.0":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@zaiusinc/app-sdk/-/app-sdk-2.2.3.tgz#45a8eb1171bad31ea2614830f2f235630cbb08fd"
+  integrity sha512-yCpZMCgUZjyHDJmd6Zi8mL0wVS42DmCTHDka8aLFfhDEe3hS8GsKzdhPADoyVICi3YwQgco5in9k192zp9X9TA==
   dependencies:
     "@zaiusinc/app-forms-schema" "^2.0.0"
     ajv "^8.17.1"
@@ -2571,9 +2571,9 @@ aws-crt@^1.24.0:
     process "^0.11.10"
 
 axios@^1.9.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.11.0.tgz#c2ec219e35e414c025b2095e8b8280278478fdb6"
-  integrity sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.12.2.tgz#6c307390136cf7a2278d09cec63b136dfc6e6da7"
+  integrity sha512-vMJzPewAlRyOgxV2dU0Cuz2O8zzzx9VYtbJOaBgXFeLc4IV/Eg50n4LowmehOOR61S8ZMpc2K5Sa7g6A4jfkUw==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.4"
