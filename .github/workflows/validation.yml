@@ -1,0 +1,13 @@
+name: Yarn Validation
+
+on:
+  push:
+    branches:
+      - '**'
+jobs:
+  automation:
+    name: Yarn Validation
+    uses: ZaiusInc/odpint-shared-workflows/.github/workflows/yarn-validation.yml@latest-stable
+    secrets: inherit
+    with:
+      node_version: 22.x

@@ -1,6 +1,8 @@
 name: Deployment
 on:
   push:
+    tags:
+      - 'v*'
   workflow_dispatch:
     inputs:
       deploy_to_staging:
@@ -11,7 +13,7 @@ on:
 jobs:
   Deploy:
     name: Deploy
-    uses: ZaiusInc/odpint-shared-workflows/.github/workflows/deployment-workflow.yml@v5
+    uses: ZaiusInc/odpint-shared-workflows/.github/workflows/deployment-workflow.yml@latest-stable
     secrets: inherit
     with:
       deploy_to_staging: ${{inputs.deploy_to_staging || false}}
