@@ -10,22 +10,41 @@ Aprimo DAM provides a REST API for accessing assets (records) and related metada
 
 ## Authorization
 
-Aprimo authorization options: 
-| Auth Method	| Use Case | 	Suitable For	 | User Interaction |
-| -------- | ------- | ------- | ------- |
-|Native Token (OAuth2) |	Service-to-service (DAM)| 	Scheduled jobs, syncs |	❌ No
-|Authorization Code Flow	| On-behalf-of-user access| 	Web apps, portals |	✅ Yes
-|Client Credentials Flow	| Server-to-server (Marketing Ops)| 	Backend systems |	❌ No
+Aprimo uses OAuth 2.0 with a **registered client** (see https://developers.aprimo.com/docs/OAuth2). All flows use a single token endpoint on the Marketing Ops host (not the DAM subdomain):
 
-Use Native Token (OAuth2) authorization for service-to-service integration. Generate a User Token in the Aprimo portal (My Profile → User Token), then base64‑encode username:token and POST to the Aprimo OAuth endpoint to obtain a JWT. For example:
+`POST https://{tenant}.aprimo.com/login/connect/token` (`Content-Type: application/x-www-form-urlencoded`)
+
+| Flow | Use case | User interaction |
+| ---- | -------- | ---------------- |
+| Client Credentials | Service-to-service, runs as one registered user. **Used by this app.** | No |
+| Resource Owner Password | Uses a user's Aprimo user token as the `password`; no refresh token | No |
+| Authorization Code + PKCE | Individual users log in via browser; supports refresh tokens | Yes |
+
+> The previously documented `/api/oauth/create-native-token` endpoint does not exist (returns 404). Do not use it.
+
+### Register the client in Aprimo
+
+Requires the Security or System Administration domain right.
+
+1. Go to **Administration > Integration > Registrations** and click **New**.
+2. Set **OAuth Flow Type** to **Client Credentials**.
+3. Enter a name, description and a client secret (you choose it; it cannot be retrieved later, so store it securely).
+4. Set the **User** the client runs as (a dedicated integration user with read access to records) and an access token lifetime (1-60 minutes).
+5. Leave the redirect URL empty (needed for PKCE only) and save. Changes can take up to 15 minutes to apply.
+
+### Get a token
+
 ```bash
-# Get OAuth token (Aprimo Marketing Ops domain, not DAM subdomain)
-curl -X POST 'https://yourdomain.aprimo.com/api/oauth/create-native-token' \
-     -H 'Authorization: Basic {base64(username:token)}' \
-     -H 'API-Version: 1'
+curl -X POST "https://yourdomain.aprimo.com/login/connect/token" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "grant_type=client_credentials&scope=api&client_id={client_id}&client_secret={client_secret}"
 ```
 
-If successful, the response contains an "access_token". Use that in subsequent DAM API calls:
+The response contains `access_token`, `expires_in` (seconds) and `token_type: Bearer`. No refresh token is issued for client credentials; request a new token when it expires or an API call returns 401. Scope `api` covers the REST API and DAM downloads.
+
+Store the client secret in the app's settings (secret field) and the token in the secret store. Never log either.
+
+Use the access token in subsequent DAM API calls:
 
 ##  Test API call with Bearer token
 ```

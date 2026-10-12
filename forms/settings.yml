@@ -1,6 +1,32 @@
 sections:
-  - key: instructions
-    label: Instructions
+  - key: connection
+    label: Aprimo Connection
+    properties:
+      - connected
     elements:
-    - type: instructions
-      text: Design your settings form in this file. See the [forms documentation](https://docs.developers.optimizely.com/digital-experience-platform/v1.5.0-optimizely-data-platform/docs/forms#settingsyml) for details.
+      - type: instructions
+        text: |
+          Connect to Aprimo DAM using an OAuth client registered in Aprimo under
+          **Administration > Integration > Registrations** (OAuth flow type: **Client Credentials**).
+      - type: text
+        key: tenant_domain
+        label: Aprimo Domain
+        required: true
+        help: "Your Aprimo environment, e.g. `mycompany.aprimo.com` (not the `.dam.` address)"
+        validations:
+          - regex: "^(https:\\/\\/)?[a-zA-Z0-9][a-zA-Z0-9-]*\\.aprimo\\.com\\/?$"
+            message: Please enter a valid Aprimo domain, e.g. mycompany.aprimo.com
+      - type: text
+        key: client_id
+        label: Client ID
+        required: true
+        help: The client ID of your Aprimo OAuth registration
+      - type: secret
+        key: client_secret
+        label: Client Secret
+        required: true
+        help: The client secret chosen when registering the OAuth client
+      - type: button
+        label: Save and Test Connection
+        action: save
+        style: primary

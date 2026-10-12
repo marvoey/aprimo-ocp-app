@@ -1,9 +1,9 @@
 meta:
   app_id: template_app
-  display_name: template_app
+  display_name: Aprimo
   version: 0.0.1-dev
   vendor: optimizely
-  summary: app summary
+  summary: Connect Aprimo DAM assets to Optimizely
   support_url: https://support.optimizely.com
   contact_email: support@optimizely.com
   categories:
